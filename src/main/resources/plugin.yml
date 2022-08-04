@@ -1,6 +1,6 @@
 name: Vnaddons
 version: '${project.version}'
-main: fr.ft.vnaddons.vnaddons.Vnaddons
+main: fr.ft.vnaddons.VNAddons
 api-version: 1.19
 authors: [ Victor, Noa ]
 description: Simple spigot plugin
