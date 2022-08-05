@@ -33,7 +33,7 @@ public final class VNAddons extends JavaPlugin {
     }
 
     private void registerCommands() {
-        String[] commands = {"spectate", "ping"};
+        String[] commands = {"spectate", "ping", "sendmycoords"};
 
         Arrays.stream(commands).forEach(command -> Objects.requireNonNull(getCommand(command)).setExecutor(new Commands()));
     }

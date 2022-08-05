@@ -11,3 +11,7 @@ commands:
       - spec
   ping:
     description: Get yours or someone's ping
+  sendmycoords:
+    description: Send your coordinates to the chat
+    aliases:
+      - smc

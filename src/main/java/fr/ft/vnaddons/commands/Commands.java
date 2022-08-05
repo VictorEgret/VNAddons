@@ -44,7 +44,7 @@ public class Commands implements CommandExecutor {
             }
             if (cmd.getName().equalsIgnoreCase("ping")) {
                 if (args.length == 0) {
-                    p.sendMessage("Your ping: " + p.getPing());
+                    p.sendMessage("Your ping: " + p.getPing() + "ms");
                     return true;
                 }
                 if (args.length == 1) {
@@ -53,7 +53,19 @@ public class Commands implements CommandExecutor {
                         p.sendMessage(ChatColor.RED + args[0] + " is not online");
                         return true;
                     }
-                    p.sendMessage(args[0] + "'s ping: " + target.getPing());
+                    p.sendMessage(args[0] + "'s ping: " + target.getPing() + "ms");
+                    return true;
+                }
+                return false;
+            }
+            if (cmd.getName().equalsIgnoreCase("sendmycoords")) {
+                if (args.length == 0) {
+                    Bukkit.broadcastMessage(
+                            p.getName() + "'s coords: " +
+                                    p.getLocation().getBlockX() + " " +
+                                    p.getLocation().getBlockY() + " " +
+                                    p.getLocation().getBlockZ()
+                    );
                     return true;
                 }
                 return false;
