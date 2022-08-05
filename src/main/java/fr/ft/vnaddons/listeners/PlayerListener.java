@@ -8,6 +8,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerToggleSneakEvent;
 
 public class PlayerListener implements Listener {
 
@@ -31,6 +32,13 @@ public class PlayerListener implements Listener {
             ));
         if (VNAddons.spectators.containsKey(player.getUniqueId())) {
             VNAddons.removeSpectator(player);
+        }
+    }
+
+    @EventHandler
+    public void onSneak(PlayerToggleSneakEvent event) {
+        if (VNAddons.spectators.containsKey(event.getPlayer().getUniqueId())) {
+            VNAddons.removeSpectator(event.getPlayer());
         }
     }
 

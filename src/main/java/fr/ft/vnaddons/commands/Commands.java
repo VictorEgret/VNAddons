@@ -19,8 +19,14 @@ public class Commands implements CommandExecutor {
                 if (args.length == 1) {
                     Player target = Bukkit.getPlayer(args[0]);
                     if (target == null || !target.isOnline()) {
-                        sender.sendMessage(ChatColor.RED + args[0] + " is not online");
-                    } else {
+                        p.sendMessage(ChatColor.RED + args[0] + " is not online");
+                        return true;
+                    }
+                    if (target.getUniqueId() == p.getUniqueId()) {
+                        p.sendMessage(ChatColor.RED + "You can't spectate yourself");
+                        return true;
+                    }
+                    if (target.getGameMode() == GameMode.SURVIVAL) {
                         if (VNAddons.spectators.containsKey(p.getUniqueId())) {
                             VNAddons.removeSpectator(p);
                         } else {
@@ -29,7 +35,25 @@ public class Commands implements CommandExecutor {
                             p.setSpectatorTarget(target);
                             p.sendMessage(ChatColor.GREEN + "Spectate mode enabled");
                         }
+                    } else {
+                        p.sendMessage(ChatColor.RED + args[0] + " is not in survival");
                     }
+                    return true;
+                }
+                return false;
+            }
+            if (cmd.getName().equalsIgnoreCase("ping")) {
+                if (args.length == 0) {
+                    p.sendMessage("Your ping: " + p.getPing());
+                    return true;
+                }
+                if (args.length == 1) {
+                    Player target = Bukkit.getPlayer(args[0]);
+                    if (target == null || !target.isOnline()) {
+                        p.sendMessage(ChatColor.RED + args[0] + " is not online");
+                        return true;
+                    }
+                    p.sendMessage(args[0] + "'s ping: " + target.getPing());
                     return true;
                 }
                 return false;
