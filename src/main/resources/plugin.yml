@@ -4,3 +4,8 @@ main: fr.ft.vnaddons.VNAddons
 api-version: 1.19
 authors: [ Victor, Noa ]
 description: Simple spigot plugin
+commands:
+  spectate:
+    description: Spectate/stop spectating someone
+    aliases:
+      - spec
