@@ -60,11 +60,14 @@ public final class VNAddons extends JavaPlugin {
         return (double[]) recentTps.get(minecraftServer);
     }
 
-    public static double[] getRecentTps() {
+    public static String getRecentTps() {
         try {
-            return getRecentTpsRefl();
+            StringBuilder result = new StringBuilder();
+            double[] tps = getRecentTpsRefl();
+            result.append(Math.min(Math.round(tps[0] * 100.0D) / 100.0D, 20.0D));
+            return result.toString();
         } catch (Throwable throwable) {
-            return new double[]{20, 20, 20};
+            return "20, 20, 20";
         }
     }
 }
