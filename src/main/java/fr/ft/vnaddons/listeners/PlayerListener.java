@@ -1,10 +1,12 @@
 package fr.ft.vnaddons.listeners;
 
 import fr.ft.vnaddons.VNAddons;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -46,5 +48,14 @@ public class PlayerListener implements Listener {
     public void onChat(AsyncPlayerChatEvent event) {
         event.setMessage(ChatColor.translateAlternateColorCodes('&', event.getMessage()));
         event.setFormat("%s§r: %s");
+    }
+
+    @EventHandler
+    public void onBreak(BlockBreakEvent event) {
+        switch (event.getBlock().getType()) {
+            case DEEPSLATE_DIAMOND_ORE:
+            case DIAMOND_ORE:
+                Bukkit.broadcastMessage(event.getPlayer().getName() + " augmente sa richesse");
+        }
     }
 }

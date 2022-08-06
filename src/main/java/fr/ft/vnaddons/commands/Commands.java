@@ -9,6 +9,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.Arrays;
+
 public class Commands implements CommandExecutor {
 
     @Override
@@ -44,7 +46,7 @@ public class Commands implements CommandExecutor {
             }
             if (cmd.getName().equalsIgnoreCase("ping")) {
                 if (args.length == 0) {
-                    p.sendMessage("Your ping: " + p.getPing() + "ms");
+                    p.sendMessage("Your ping: " + p.getPing() + "ms (TPS: " + Arrays.toString(VNAddons.getRecentTps()) + ")");
                     return true;
                 }
                 if (args.length == 1) {
@@ -53,7 +55,7 @@ public class Commands implements CommandExecutor {
                         p.sendMessage(ChatColor.RED + args[0] + " is not online");
                         return true;
                     }
-                    p.sendMessage(args[0] + "'s ping: " + target.getPing() + "ms");
+                    p.sendMessage(args[0] + "'s ping: " + target.getPing() + "ms (TPS: " + Arrays.toString(VNAddons.getRecentTps()) + ")");
                     return true;
                 }
                 return false;
@@ -64,7 +66,8 @@ public class Commands implements CommandExecutor {
                             p.getName() + "'s coords: " +
                                     p.getLocation().getBlockX() + " " +
                                     p.getLocation().getBlockY() + " " +
-                                    p.getLocation().getBlockZ()
+                                    p.getLocation().getBlockZ() + " " +
+                                    " (" + p.getWorld().getEnvironment().name() + "§r)"
                     );
                     return true;
                 }
