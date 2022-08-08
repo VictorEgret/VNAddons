@@ -9,8 +9,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.Arrays;
-
 public class Commands implements CommandExecutor {
 
     @Override
@@ -62,18 +60,31 @@ public class Commands implements CommandExecutor {
             }
             if (cmd.getName().equalsIgnoreCase("sendmycoords")) {
                 if (args.length == 0) {
-                    Bukkit.broadcastMessage(
-                            p.getName() + "'s coords: " +
-                                    p.getLocation().getBlockX() + " " +
-                                    p.getLocation().getBlockY() + " " +
-                                    p.getLocation().getBlockZ() + " " +
-                                    " (" + p.getWorld().getEnvironment().name() + "§r)"
-                    );
+                    for (Player player : Bukkit.getOnlinePlayers()) {
+                        player.sendMessage(
+                                p.getName() + "'s coords: " +
+                                        p.getLocation().getBlockX() + " " +
+                                        p.getLocation().getBlockY() + " " +
+                                        p.getLocation().getBlockZ() + " " +
+                                        "(" + p.getWorld().getEnvironment().name() + "§r)" +
+                                        formatDistance(p, player)
+                        );
+                    }
                     return true;
                 }
                 return false;
             }
         }
         return false;
+    }
+
+    private String formatDistance(Player p, Player player) {
+        StringBuilder result = new StringBuilder();
+        if (p.getWorld().getEnvironment() == player.getWorld().getEnvironment()) {
+            result.append(" (");
+            result.append(Math.round(p.getLocation().distance(player.getLocation())));
+            result.append("blocks away)");
+        }
+        return result.toString();
     }
 }
