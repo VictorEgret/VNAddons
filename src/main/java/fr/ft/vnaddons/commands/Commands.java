@@ -80,10 +80,10 @@ public class Commands implements CommandExecutor {
 
     private String formatDistance(Player p, Player player) {
         StringBuilder result = new StringBuilder();
-        if (p.getWorld().getEnvironment() == player.getWorld().getEnvironment()) {
+        if (p.getWorld().getEnvironment() == player.getWorld().getEnvironment() && !p.getUniqueId().equals(player.getUniqueId())) {
             result.append(" (");
             result.append(Math.round(p.getLocation().distance(player.getLocation())));
-            result.append("blocks away)");
+            result.append(" blocks away)");
         }
         return result.toString();
     }

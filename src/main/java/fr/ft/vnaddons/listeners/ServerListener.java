@@ -30,7 +30,7 @@ public class ServerListener implements Listener {
                 try {
                     icons.add(Bukkit.loadServerIcon(icon));
                 } catch (Exception e) {
-                    Bukkit.getLogger().log(Level.SEVERE, "§cFailed to cache " + icon.getName() + " in server icons");
+                    Bukkit.getLogger().log(Level.SEVERE, "Failed to cache " + icon.getName() + " in server icons");
                 }
             }
         }
