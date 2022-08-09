@@ -2,6 +2,7 @@ package fr.ft.vnaddons;
 
 import fr.ft.vnaddons.commands.Commands;
 import fr.ft.vnaddons.listeners.PlayerListener;
+import fr.ft.vnaddons.listeners.ServerListener;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
@@ -38,7 +39,7 @@ public final class VNAddons extends JavaPlugin {
     }
 
     private void registerListeners() {
-        Listener[] listeners = {new PlayerListener()};
+        Listener[] listeners = {new PlayerListener(), new ServerListener()};
 
         Arrays.stream(listeners).forEach(listener -> getServer().getPluginManager().registerEvents(listener, this));
     }

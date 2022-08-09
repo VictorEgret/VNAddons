@@ -55,7 +55,7 @@ public class PlayerListener implements Listener {
         switch (event.getBlock().getType()) {
             case DEEPSLATE_DIAMOND_ORE:
             case DIAMOND_ORE:
-                Bukkit.broadcastMessage(event.getPlayer().getName() + " augmente sa richesse");
+                Bukkit.broadcastMessage(ChatColor.AQUA + event.getPlayer().getName() + " augmente sa richesse");
         }
     }
 }
