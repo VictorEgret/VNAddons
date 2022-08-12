@@ -14,7 +14,8 @@ import java.util.logging.Level;
 public class ServerListener implements Listener {
 
     private final ArrayList<CachedServerIcon> icons = new ArrayList<>();
-    private final Random rand = new Random();;
+    private final ArrayList<String> iconsNames = new ArrayList<>();
+    private final Random rand = new Random();
 
     public ServerListener() {
         loadServerIcons();
@@ -24,11 +25,12 @@ public class ServerListener implements Listener {
         File iconsFolder = new File(Bukkit.getWorldContainer().getAbsolutePath() + "/icons");
 
         iconsFolder.mkdirs();
-
+        icons.clear();
         if (iconsFolder.isDirectory()) {
             for (File icon : iconsFolder.listFiles()) {
                 try {
                     icons.add(Bukkit.loadServerIcon(icon));
+                    iconsNames.add(icon.getName());
                 } catch (Exception e) {
                     Bukkit.getLogger().log(Level.SEVERE, "Failed to cache " + icon.getName() + " in server icons");
                 }
@@ -38,9 +40,12 @@ public class ServerListener implements Listener {
 
     @EventHandler
     public void onPing(ServerListPingEvent event) {
+        loadServerIcons();
         if (!icons.isEmpty()) {
             try {
-                event.setServerIcon(icons.get(rand.nextInt(icons.size())));
+                int current = rand.nextInt(icons.size());
+                event.setServerIcon(icons.get(current));
+                event.setMotd(event.getMotd() + " (" + iconsNames.get(current) + ")");
             } catch (Exception exception) {
 
             }
